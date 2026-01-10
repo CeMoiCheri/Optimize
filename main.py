@@ -1,11 +1,11 @@
 from flask import Flask, jsonify, request
-
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # <--- this enables requests from any domain
 
 @app.route("/run")
 def run():
-    # Replace this with your actual logic
     result = sum(range(10))
     return jsonify({"result": result})
 
