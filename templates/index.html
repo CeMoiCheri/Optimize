@@ -1,21 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Python Button Test</title>
 </head>
 <body>
-<button onclick="runCode()">Run</button>
-<p id="output"></p>
+    <h1>Python Button Test</h1>
 
-<script>
-function runCode() {
-    fetch("https://optimize-uyg0.onrender.com/run")
-        .then(res => res.json())
-        .then(data => {
-            document.getElementById("output").innerText = data.result;
-        });
-}
-</script>
+    <input type="number" id="inputX" placeholder="Enter a number" />
+    <button onclick="runCode()">Run</button>
+
+    <p>Output: <span id="output"></span></p>
+
+    <script>
+    function runCode() {
+        let x = document.getElementById("inputX").value;
+        let url = "/run";
+        if (x) url += "?x=" + x;
+
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("output").innerText = data.result;
+            })
+            .catch(err => console.error(err));
+    }
+    </script>
 </body>
 </html>
