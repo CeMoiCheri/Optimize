@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Python Button Test</title>
+</head>
+<body>
+    <h1>Python Button Test</h1>
+
+    <input type="number" id="inputX" placeholder="Enter a number" />
+    <button onclick="runCode()">Run</button>
+
+    <p>Output: <span id="output"></span></p>
+
+    <script>
+    const API_BASE = "https://optimize-uyg0.onrender.com";
+
+    function runCode() {
+        const x = document.getElementById("inputX").value || 0;
+        const url = `${API_BASE}/run?x=${x}`;
+
+        fetch(url)
+            .then(res => {
+                if (!res.ok) throw new Error("Network error");
+                return res.json();
+            })
+            .then(data => {
+                document.getElementById("output").innerText = data.result;
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById("output").innerText = "Error";
+            });
+    }
+    </script>
+</body>
+</html>
